@@ -209,12 +209,10 @@ def table_water_level(lake, startdate, enddate, result_dir):
             # Error catching for invalid directories.
             if len(tempdir) > 0:
                 directory = tempdir
-                print directory
             else:
                 ctypes.windll.user32.MessageBoxA(0, "Invalid directory. Table will be saved in the results folder."
                                               , "Invalid Directory", 1)
-                directory = 'C:/Projects/Fall 2015 - Lake Tahoe Water Resources/Data/Python Scripts/UI_Script/results'
-            print directory
+                directory = 'results'
             with open(directory + '/' + lake + '.csv', 'wb') as f:
                 writer = csv.writer(f)
                 writer.writerow(["Date", "Area (km^2)"])
@@ -228,7 +226,6 @@ def plot_water_level(lake, startdate, enddate, result_dir):
     # Compares lake names found from .txt files with the chosen lake. If a match is found, the parser is run.
     if lake in lakes:
         lake = result_dir + '\\' + lake + '.txt'
-        print lake
         (features, dates, water, clouds) = parse_lake_results(lake, startdate, enddate)
 
         # Error-catcher for situation where a date range is selected and no good points are available for plotting.
